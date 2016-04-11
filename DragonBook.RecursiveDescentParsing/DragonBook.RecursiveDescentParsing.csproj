@@ -40,15 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExerciseA\Lexer.cs" />
+    <Compile Include="ExerciseA\Parser.cs" />
+    <Compile Include="ExerciseB\Lexer.cs" />
+    <Compile Include="ExerciseC\Lexer.cs" />
     <Compile Include="ParseTreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Token.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ExerciseA\" />
-    <Folder Include="ExerciseB\" />
-    <Folder Include="ExerciseC\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

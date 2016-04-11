@@ -13,9 +13,9 @@ namespace DragonBook.RecursiveDescentParsing
         public bool IsTerminal { get { return this.Token != null; } }
         public IEnumerable<ParseTreeNode> Children { get; private set; }
         
-        public ParseTreeNode(string type, Token token)
+        public ParseTreeNode(Token token)
         {
-            this.Type = type;
+            this.Type = token.Type;
             this.Token = token;
         }
 
