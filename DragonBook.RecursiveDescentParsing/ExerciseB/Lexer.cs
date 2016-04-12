@@ -10,15 +10,18 @@ namespace DragonBook.RecursiveDescentParsing.ExerciseB
     {
         public IEnumerable<Token> Lex(string input)
         {
-            foreach (var character in input ?? "")
+            foreach (var character in (input ?? "") + "\n")
             {
                 switch (character)
                 {
                     case '(':
-                        yield return new Token("LeftParenthesis", character.ToString());
+                        yield return new Token("Parenthesis", character.ToString());
                         break;
                     case ')':
-                        yield return new Token("RightParenthesis", character.ToString());
+                        yield return new Token("Parenthesis", character.ToString());
+                        break;
+                    case '\n':
+                        yield return new Token("EndOfStream", "");
                         break;
                     default:
                         throw new Exception($"The character { character } is not part of the language");

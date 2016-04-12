@@ -43,7 +43,9 @@
     <Compile Include="ExerciseA\Lexer.cs" />
     <Compile Include="ExerciseA\Parser.cs" />
     <Compile Include="ExerciseB\Lexer.cs" />
+    <Compile Include="ExerciseB\Parser.cs" />
     <Compile Include="ExerciseC\Lexer.cs" />
+    <Compile Include="ExerciseC\Parser.cs" />
     <Compile Include="ParseTreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Token.cs" />

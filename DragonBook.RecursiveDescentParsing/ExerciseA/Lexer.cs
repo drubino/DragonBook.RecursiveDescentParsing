@@ -10,7 +10,7 @@ namespace DragonBook.RecursiveDescentParsing.ExerciseA
     {
         public IEnumerable<Token> Lex(string input)
         {
-            foreach (var character in input ?? "")
+            foreach (var character in (input ?? "") + "\n")
             {
                 switch (character)
                 {
@@ -22,6 +22,9 @@ namespace DragonBook.RecursiveDescentParsing.ExerciseA
                         break;
                     case 'a':
                         yield return new Token("Character", character.ToString());
+                        break;
+                    case '\n':
+                        yield return new Token("EndOfStream", "");
                         break;
                     default:
                         throw new Exception($"The character { character } is not part of the language");

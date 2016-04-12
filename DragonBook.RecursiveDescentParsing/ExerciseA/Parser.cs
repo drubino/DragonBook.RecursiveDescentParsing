@@ -9,10 +9,13 @@ namespace DragonBook.RecursiveDescentParsing.ExerciseA
     public class Parser
     {
         public ParseTreeNode Parse(string input)
-        {
+        { 
             var lexer = new Lexer();
             var inputTokens = lexer.Lex(input);
+
             var enumerator = inputTokens.GetEnumerator();
+            enumerator.MoveNext();
+
             var node = ParseExpression(enumerator);
             return node;
         }
@@ -26,22 +29,18 @@ namespace DragonBook.RecursiveDescentParsing.ExerciseA
                 return new ParseTreeNode("Expression", new[] { ParseAddition(enumerator) });
             if (token.Value == "-")
                 return new ParseTreeNode("Expression", new[] { ParseSubtraction(enumerator) });
+            if (token.Type == "EndOfStream")
+                Read(enumerator);
 
             throw new Exception("The token was not recognized");
         }
 
         private ParseTreeNode ParseAddition(IEnumerator<Token> enumerator)
         {
-            var token = enumerator.Current;
-
+            var token = Read(enumerator);
             var additionNode = new ParseTreeNode(token);
-            enumerator.MoveNext();
-
             var leftExpression = ParseExpression(enumerator);
-            enumerator.MoveNext();
-
             var rightExpression = ParseExpression(enumerator);
-            enumerator.MoveNext();
 
             return new ParseTreeNode("Addition", new[] 
             {
@@ -53,16 +52,10 @@ namespace DragonBook.RecursiveDescentParsing.ExerciseA
 
         private ParseTreeNode ParseSubtraction(IEnumerator<Token> enumerator)
         {
-            var token = enumerator.Current;
-
+            var token = Read(enumerator);
             var subtractionNode = new ParseTreeNode(token);
-            enumerator.MoveNext();
-
             var leftExpression = ParseExpression(enumerator);
-            enumerator.MoveNext();
-
             var rightExpression = ParseExpression(enumerator);
-            enumerator.MoveNext();
 
             return new ParseTreeNode("Subtraction", new[]
             {
@@ -74,11 +67,21 @@ namespace DragonBook.RecursiveDescentParsing.ExerciseA
 
         private ParseTreeNode ParseCharacter(IEnumerator<Token> enumerator)
         {
-            var token = enumerator.Current;
+            var token = Read(enumerator);
             var node = new ParseTreeNode(token);
+            return node;
+        }
+
+        private Token Read(IEnumerator<Token> enumerator)
+        {
+            if (enumerator.Current != null &&
+                enumerator.Current.Type == "EndOfStream")
+                throw new Exception("The string is out of characters.");
+
+            var current = enumerator.Current;
             enumerator.MoveNext();
 
-            return node;
+            return current;
         }
     }
 }

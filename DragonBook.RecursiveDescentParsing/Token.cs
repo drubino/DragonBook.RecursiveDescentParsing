@@ -16,5 +16,10 @@ namespace DragonBook.RecursiveDescentParsing
             this.Type = type;
             this.Value = value;
         }
+
+        public override string ToString()
+        {
+            return $"{ this.Type }: {Value}";
+        }
     }
 }
